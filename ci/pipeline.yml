@@ -261,15 +261,21 @@ jobs:
         file: bosh-dns-release/ci/tasks/test-stress/deploy-docker.yml
         input_mapping:
           bbl-state: updated-bbl-state
+        params:
+          BBL_STATE_SUBDIRECTORY: test-stress-1.12.x/bbl-state
       - task: deploy-containers
         file: bosh-dns-release/ci/tasks/test-stress/deploy-n.yml
         input_mapping:
           stemcell: warden-stemcell
           bbl-state: updated-bbl-state
+        params:
+          BBL_STATE_SUBDIRECTORY: test-stress-1.12.x/bbl-state
       - task: stress-containers
         file: bosh-dns-release/ci/tasks/test-stress/run-errand.yml
         input_mapping:
           bbl-state: updated-bbl-state
+        params:
+          BBL_STATE_SUBDIRECTORY: test-stress-1.12.x/bbl-state
       ensure:
         task: destroy-env
         file: bosh-dns-release/ci/tasks/test-stress/destroy-env.yml
