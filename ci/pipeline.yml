@@ -14,7 +14,6 @@ groups:
   - test-acceptance-windows2019
   - test-stress
   - brats-ubuntu
-  - upload-staging-release
   - finalize-release
   - delivery
 
