@@ -321,17 +321,6 @@ jobs:
         FOCUS_SPEC: "BoshDns"
         STEMCELL_OS: "ubuntu-trusty"
 
-- name: upload-staging-release
-  serial: true
-  plan:
-    - get: candidate-release
-      passed: [delivery]
-      trigger: true
-    - put: staging-release
-      params:
-        file: "candidate-release/bosh-dns-dev-release.tgz"
-        acl: public-read
-
 - name: finalize-release
   plan:
     - in_parallel:
@@ -417,14 +406,6 @@ resources:
     access_key_id: {{candidate_release_access_key_id}}
     secret_access_key: {{candidate_release_secret_access_key}}
     versioned_file: "bosh-dns-dev-release-1.12.0.tgz"
-
-- name: staging-release
-  type: s3
-  source:
-    bucket: {{candidate_release_bucket}}
-    access_key_id: {{candidate_release_access_key_id}}
-    secret_access_key: {{candidate_release_secret_access_key}}
-    versioned_file: "bosh-dns-staging-release-1.12.0.tgz"
 
 - name: brats-src
   type: git
